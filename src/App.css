@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 20rem;
+  width: 16rem;
 }
 .container{
   border: 1px solid rgba(11, 11, 11, 0.283);

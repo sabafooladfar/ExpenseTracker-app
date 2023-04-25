@@ -5,7 +5,9 @@ import TransActions from "./TransActions";
 const ExpenseApp = () => {
   const [expense, setExpense] = useState(0);
   const [income, setIncome] = useState(0);
-  const [transActions, setTransActions] = useState([]);
+  const [transActions, setTransActions] = useState(() => {
+    return JSON.parse(localStorage.getItem("transActionsList")) || [];
+  });
 
   const addTransactionHandler = (formValues) => {
     setTransActions([...transActions, { ...formValues, id: Date.now() }]);
@@ -14,10 +16,13 @@ const ExpenseApp = () => {
     let exp = 0;
     let inc = 0;
     transActions.forEach((t) => {
-      t.type === "expense" ? (exp = exp + parseFloat(t.amount)) : (inc = inc + parseFloat(t.amount));
+      t.type === "expense"
+        ? (exp = exp + parseFloat(t.amount))
+        : (inc = inc + parseFloat(t.amount));
     });
     setExpense(exp);
     setIncome(inc);
+    localStorage.setItem("transActionsList", JSON.stringify(transActions));
   }, [transActions]);
   return (
     <section className="container">

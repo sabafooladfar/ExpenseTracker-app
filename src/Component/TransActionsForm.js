@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TransActionsForm = ({ addTransaction }) => {
+const TransActionsForm = ({ addTransaction,setIsShow }) => {
   const [formValues, setFormValue] = useState({
     type: "expense",
     desc: "",
@@ -12,6 +12,7 @@ const TransActionsForm = ({ addTransaction }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     addTransaction(formValues);
+    setIsShow((prevState) => !prevState);
   };
 
   return (
